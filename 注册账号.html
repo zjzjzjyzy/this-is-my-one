@@ -80,15 +80,15 @@
             <div class="form-group">
                 <!--使用label标签来描述输入框，for属性绑定到input标签的id属性，以便于屏幕阅读器识别-->
                 <label for="username">用户名:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username1" name="username"size="20" required>
             </div>
             <div class="form-group">
                 <label for="author">作者:</label>
-                <input type="author" id="author" name="author" required>
+                <input type="author" id="author" name="author"size="20" required>
             </div>
             <div class="form-group">
                 <label for="password">密码:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password1" name="password" required>
             </div>
             <div class="form-group">
                 <label for="confirm-password">确认密码:</label>
@@ -101,36 +101,40 @@
         </div>
     </div>
     <p><font size="5px" color="red">注册功能暂时有bug，未修复，请等待修复！</font></p>
-    <script>
-         //bug暂未修复
-         //bug描述为：1.注册成功后没有注册成功提醒 2.当用户两次密码输入不一致时，任然可以注册
-         //.....
-        function getSelectedOption() {
-          // 获取输入的用户名和密码
-          var username = document.getElementById("username").value;
-          var password = document.getElementById("password").value;
-          // 验证用户名和密码是否为空
-          if (username == "" || password == "") {
-            alert("用户名和密码不能为空！");
-          }
-             else{
-                    // 验证密码是否一致
+         <script>
+            // 获取用户名和密码
+            function getSelectedOption() {
+                var username = document.getElementById("username1").value;
+                var password = document.getElementById("password1").value;
+        
+                // 验证用户名和密码是否为空
+                if (username == "" || password == "") {
+                    alert("用户名和密码不能为空！");
+                    return; // 退出函数
+                }
+        
+                // 验证密码是否一致
                 if (password != document.getElementById("confirm-password").value) {
                     alert("两次输入的密码不一致！");
-                }
-                else{
-                    // 检测用户点击注册按钮时触发的事件注册成功后事件
+                    return; // 退出函数
+                } else {
+                    // 注册成功后提示
                     alert("注册成功！");
+                     // 将用户名和密码存储到localStorage
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("password", password);
                     // 跳转到登录页面
                     window.location.href = "index.html";
                 }
-            }  
-        }  
-        // 绑定点击事件
-        document.querySelector("form").addEventListener("btn", function(event) {
-        event.preventDefault();
-        getSelectedOption();
-        });
-    </script>
+            }
+            
+            // 绑定点击事件
+            //此处的点击事件应该绑定在点击按钮事件上，而不是表单的submit事件上
+            document.querySelector(".btn").addEventListener("click", function(event) {
+                event.preventDefault(); // 防止默认提交
+                getSelectedOption(); // 调用注册函数
+            });
+        </script>
+        
 </body>
 </html>

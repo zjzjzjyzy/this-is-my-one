@@ -101,15 +101,17 @@
             <a href="忘记密码.html">忘记密码?</a>
         </div>
     </div>
+    <script src="账号数据.js"></script>
     <script>
         function getSelectedOption() {
           
           // 获取输入的用户名和密码
           var username = document.getElementById("username").value;
           var password = document.getElementById("password").value;
-          // 判断密码和用户名是否正确
-          var correctUsername = "zj"; 
-          var correctPassword = "zj20le";
+          // 从localStorage获取存储的用户名和密码
+          var correctUsername = localStorage.getItem("username");
+          var correctPassword = localStorage.getItem("password");
+           // 判断密码和用户名是否正确
           if (username === correctUsername && password === correctPassword) {
             alert("登录成功！");
             // 跳转到主页
